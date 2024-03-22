@@ -1,0 +1,17 @@
+.companyCard__header{
+    display: flex;
+    gap: 20%;
+    padding: 1rem;
+}
+
+.companyCard__content{
+    display: flex;
+    gap: 20%;
+    padding: 1rem;
+    align-items: center;
+    border: 1px solid gray;
+}
+
+.companyCard__button--button{
+    background-color: lightblue;
+}
