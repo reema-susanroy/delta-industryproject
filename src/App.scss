@@ -1,0 +1,30 @@
+header{
+    background-color:#434EE1;
+    height:80px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+
+    & input{
+        height:30px;
+        width:300px;
+        border-radius:5px;
+        border:none;
+        margin-right:20px;
+        color:rgb(45, 48, 119);
+        padding:2px 15px;
+        font-size:1.1rem;
+    }
+    & button{
+        font-size:1.1rem;
+        font-weight:bold;
+        height:34px;
+        width:100px;
+        border-radius:5px;
+        border:none;
+        background-color:white;
+        color:rgb(45, 48, 119);
+    }
+}
+

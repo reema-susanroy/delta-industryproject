@@ -1,32 +1,40 @@
 import axios from "axios";
 import "./App.css";
+import "./App.scss";
 import { useState, useEffect } from "react";
+import CompanyCard from "../src/components/CompanyCard/CompanyCard";
 
 function App() {
-
-  const articleCategories = [ //For optional dropdown category selection
-    'business',
-    'technology',
-    'science',
-    'health',
-    'entertainment',
-    'sports',
-    'finance',
-    'politics',
-    'world',
-    'lifestyle',
-    'education',
-    'environment',
-    'culture',
-    'automotive',
-    'legal'
+  const articleCategories = [
+    //For optional dropdown category selection
+    "business",
+    "technology",
+    "science",
+    "health",
+    "entertainment",
+    "sports",
+    "finance",
+    "politics",
+    "world",
+    "lifestyle",
+    "education",
+    "environment",
+    "culture",
+    "automotive",
+    "legal",
   ];
+  ///////UseState////////
+  const [companies, setCompanies] = useState([]);
+  const [query, setQuery] = useState("");
 
-  const getCompanies = async () => {
+  ///////Functions////////
+
+  const getCompanies = async (event) => {
+    event.preventDefault();
     try {
-      const query = "finance AND women";
+      // const query = "finance AND women";
       const response = await axios.get(
-        `https://newsapi.org/v2/everything?q=${query}&from=2024-03-20&to=2024-03-20&apiKey=ec175fa86341456eb6362867de1bf088`
+        `https://newsapi.org/v2/everything?q=${query}&from=2024-03-20&to=2024-03-20&apiKey=c4809242d4bc42fa8470f61dde9e773b`
       );
 
       console.log(response);
@@ -41,6 +49,10 @@ function App() {
         // // Construct the base URL by combining the protocol and host
         // const baseUrl = `${parsedUrl.protocol}//${parsedUrl.host}`;
 
+        // if(article.source.name === "[removed]"){
+        //   console.log(article)
+        //   return null
+        // }
         return {
           name: article.source.name,
           url: article.url,
@@ -72,14 +84,36 @@ function App() {
       });
 
       console.log(uniqueCompanies);
+      setCompanies(uniqueCompanies);
     } catch (error) {}
   };
 
-  useEffect(() => {
-    getCompanies();
-  }, []);
+  const handleChange = (event) => {
+    const text = event.target.value;
+    setQuery(text);
+  };
 
-  return <div className="App"></div>;
+  useEffect(() => {}, [companies]);
+
+  return (
+    <div className="App">
+      <header>
+        <form onSubmit={getCompanies}>
+          <input
+            className="search__area"
+            type="text"
+            placeholder="Search for your tag..."
+            value={query}
+            onChange={handleChange}
+          />
+          <button className="search__button" type="submit">
+            Search
+          </button>
+        </form>
+      </header>
+      <CompanyCard companiesProp={companies} />
+    </div>
+  );
 }
 
 export default App;
